@@ -22,6 +22,32 @@ t_stack    *ft_lstlast(t_stack *lst)
     return (lastnode);
 }
 
+int	ft_atoi(const char *str)
+{
+	int	i;
+	int	sign;
+	int	res;
+
+	i = 0;
+	sign = 1;
+	res = 0;
+	while (str[i] == 32 || (str[i] <= 13 && str[i] >= 9))
+		i++;
+	if (str[i] == '-')
+	{
+		sign = -1;
+		i++;
+	}
+	else if (str[i] == '+')
+		i++;
+	while (str[i] <= 57 && str[i] >= 48)
+	{
+		res = (res * 10) + (str[i] - 48);
+		i++;
+	}
+	return (res * sign);
+}
+
 void    ft_lstadd_back(t_stack **lst, t_stack *new)
 {
     t_stack  *last_node;
@@ -47,9 +73,12 @@ void print_list(t_stack *head) {
 
 int main(int argc, char **argv)
 {
-    t_stack *a_stack = create_newnode(10);
-    ft_lstadd_back(&a_stack, create_newnode(20));
-    ft_lstadd_back(&a_stack, create_newnode(30));
-    ft_lstadd_back(&a_stack, create_newnode(40));
+    int i = 1;
+    t_stack *a_stack = NULL;
+    while (i < argc)
+    {
+        ft_lstadd_back(&a_stack, create_newnode(ft_atoi(argv[i])));
+        i++;
+    }
     print_list(a_stack);
 }
