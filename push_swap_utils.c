@@ -1,10 +1,10 @@
 #include "push_swap.h"
 
-int	ft_atoi(const char *str)
+int	ft_atoi_safe(const char *str)
 {
 	int	i;
 	int	sign;
-	int	res;
+	long	res;
 
 	i = 0;
 	sign = 1;
@@ -21,7 +21,21 @@ int	ft_atoi(const char *str)
 	while (str[i] <= 57 && str[i] >= 48)
 	{
 		res = (res * 10) + (str[i] - 48);
+		if (sign == 1 && res > INT_MAX)
+			exit_error();
+		if (sign == -1 && -res < INT_MIN)
+			exit_error();
 		i++;
 	}
-	return (res * sign);
+	return ((int)res * sign);
+}
+
+int	ft_strlen(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
 }
