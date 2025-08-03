@@ -1,67 +1,5 @@
 #include "push_swap.h"
 
-t_stack *create_newnode(int value)
-{
-    t_stack *newnode = malloc(sizeof(t_stack));
-    if (!newnode)
-        return NULL;
-    newnode->value = value;
-    newnode->next = NULL;
-    return newnode;
-}
-
-t_stack    *ft_lstlast(t_stack *lst)
-{
-    t_stack    *lastnode;
-
-    if (!lst)
-        return (NULL);
-    lastnode = lst;
-    while (lastnode->next != NULL)
-        lastnode = lastnode->next;
-    return (lastnode);
-}
-
-int	ft_atoi(const char *str)
-{
-	int	i;
-	int	sign;
-	int	res;
-
-	i = 0;
-	sign = 1;
-	res = 0;
-	while (str[i] == 32 || (str[i] <= 13 && str[i] >= 9))
-		i++;
-	if (str[i] == '-')
-	{
-		sign = -1;
-		i++;
-	}
-	else if (str[i] == '+')
-		i++;
-	while (str[i] <= 57 && str[i] >= 48)
-	{
-		res = (res * 10) + (str[i] - 48);
-		i++;
-	}
-	return (res * sign);
-}
-
-void    ft_lstadd_back(t_stack **lst, t_stack *new)
-{
-    t_stack  *last_node;
-
-    if (!lst || !new)
-        return ;
-    if (!*lst)
-    {
-        *lst = new;
-        return ;
-    }
-    last_node = ft_lstlast(*lst);
-    last_node->next = new;
-}
 void print_list(t_stack *head) {
     t_stack *current = head;
     while (current != NULL) {
@@ -71,14 +9,29 @@ void print_list(t_stack *head) {
     printf("NULL\n");
 }
 
+void exit_error()
+{
+    exit(1);
+}
+
 int main(int argc, char **argv)
 {
+    t_data data;
     int i = 1;
-    t_stack *a_stack = NULL;
+    int j = 0;
+    data.a_stack = NULL;
+    char **temp_arr;
     while (i < argc)
     {
-        ft_lstadd_back(&a_stack, create_newnode(ft_atoi(argv[i])));
+        temp_arr = ft_split(argv[i], ' ');
+        while (temp_arr[j] != NULL)
+        {
+            check_for_duplicates(ft_atoi(temp_arr[j]), data.a_stack);
+            ft_lstadd_back(&data.a_stack, create_newnode(ft_atoi(temp_arr[j])));
+            j++;
+        }
+        j = 0;
         i++;
     }
-    print_list(a_stack);
+    print_list(data.a_stack);
 }
