@@ -16,10 +16,11 @@ void exit_error()
 
 int main(int argc, char **argv)
 {
-    t_data data;
+    t_data *a = malloc(sizeof(t_data));
+    t_data *b = malloc(sizeof(t_data));
     int i = 1;
     int j = 0;
-    data.a_stack = NULL;
+    a->stack = NULL;
     char **temp_arr;
     if (argc < 2)
         exit_error(); 
@@ -30,12 +31,16 @@ int main(int argc, char **argv)
         check_for_invalidchar(argv[i]);
         while (temp_arr[j] != NULL)
         {
-            check_for_duplicates(ft_atoi_safe(temp_arr[j]), data.a_stack);
-            ft_lstadd_back(&data.a_stack, create_newnode(ft_atoi_safe(temp_arr[j])));
+            check_for_duplicates(ft_atoi_safe(temp_arr[j]), a->stack);
+            ft_lstadd_back(&a->stack, create_newnode(ft_atoi_safe(temp_arr[j])));
             j++;
         }
         j = 0;
         i++;
     }
-    print_list(data.a_stack);
+    print_list(a->stack);
+    printf("\n");
+    sa(a);
+    sb(b);
+    print_list(a->stack);
 }
