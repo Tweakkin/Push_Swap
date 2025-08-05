@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <limits.h>
+#include <unistd.h>
 
 
 typedef struct s_stack
@@ -31,6 +32,14 @@ void    check_for_duplicates(int num, t_stack *stack);
 char	**ft_split(char const *s, char c);
 int	ft_strlen(const char *str);
 void check_for_emptystring(char *arg);
-//int sa(t_data **a_data);
+int pa(t_data *a_data, t_data *b_data);
+int pb(t_data *a_data, t_data *b_data);
+int ra(t_data *a_data);
+int rb(t_data *b_data);
+int rr(t_data *a_data, t_data *b_data);
+t_stack *ft_secondlast(t_stack *lst);
+int rra(t_data *a_data);
+int rrb(t_data *b_data);
+int rrr(t_data *a_data, t_data *b_data);
 
 #endif

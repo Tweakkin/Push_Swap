@@ -21,6 +21,7 @@ int main(int argc, char **argv)
     int i = 1;
     int j = 0;
     a->stack = NULL;
+    b->stack = NULL;
     char **temp_arr;
     if (argc < 2)
         exit_error(); 
@@ -38,9 +39,6 @@ int main(int argc, char **argv)
         j = 0;
         i++;
     }
-    print_list(a->stack);
-    printf("\n");
-    sa(a);
-    sb(b);
+    rrr(a, b);
     print_list(a->stack);
 }
