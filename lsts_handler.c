@@ -12,6 +12,17 @@ t_stack    *ft_lstlast(t_stack *lst)
     return (lastnode);
 }
 
+t_stack *ft_secondlast(t_stack *lst)
+{
+    t_stack *seclastnode;
+    if (!lst || !lst->next)
+        return (NULL);
+    seclastnode = lst;
+    while (seclastnode->next->next != NULL)
+        seclastnode = seclastnode->next;
+    return (seclastnode);
+}
+
 void	ft_lstadd_front(t_stack **lst, t_stack *new)
 {
 	if (lst && new)
