@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-int	ft_atoi_safe(const char *str)
+int	ft_atoi_safe(const char *str, t_data *a, t_data *b, char **argv)
 {
 	int	i;
 	int	sign;
@@ -22,9 +22,9 @@ int	ft_atoi_safe(const char *str)
 	{
 		res = (res * 10) + (str[i] - 48);
 		if (sign == 1 && res > INT_MAX)
-			exit_error();
+			exit_free(a, b, argv);
 		if (sign == -1 && -res < INT_MIN)
-			exit_error();
+			exit_free(a, b, argv);
 		i++;
 	}
 	return ((int)res * sign);
